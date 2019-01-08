@@ -54,7 +54,6 @@ Eventproxy.prototype.trigger = function(name, data) {
     while (both--) {
         ev = both ? name : ALL_EVENT;
         list = calls[ev];
-        console.log(ev)
         if(!list) continue;
 
         for(i = 0, l = list.length; i < l; i++) {
@@ -77,7 +76,30 @@ Eventproxy.prototype.trigger = function(name, data) {
     return this;
 };
 
+// put the callbacks
+Eventproxy.prototype.headbind = function(ev, fn) {
+    this._callbacks[ev] = this._callbacks[ev] || [];
+    this._callbacks[ev].unshift(fn);
+    return this; 
+};
+
+// remove all listening fn
+Eventproxy.prototype.removeAllListeners = function(ev) {
+    this.removeEventListener(ev);
+    return this;
+}
 Eventproxy.prototype.emit = Eventproxy.prototype.trigger;
+
+// immediate trigger
+Eventproxy.prototype.immediate = function(ev, fn, data) {
+    this.bind(ev, fn);
+    this.trigger(ev, data);
+    return this;
+};
+
+Eventproxy.prototype.all = function() {
+
+};
 
 Eventproxy.prototype.once = function(ev, fn) {
     var self = this, args = arguments;

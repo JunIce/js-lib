@@ -9,3 +9,7 @@ event.emit('say')
 console.log(count)
 event.emit('say')
 console.log(count)
+
+event.immediate('good', function(){
+    console.log('good is trigger')
+})
