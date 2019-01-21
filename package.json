@@ -1,0 +1,28 @@
+{
+  "name": "js-lib",
+  "version": "1.0.0",
+  "description": "",
+  "main": "eventproxy.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JunIce/js-lib.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JunIce/js-lib/issues"
+  },
+  "homepage": "https://github.com/JunIce/js-lib#readme",
+  "devDependencies": {
+    "browserify": "^16.2.3",
+    "gulp": "^4.0.0",
+    "gulp-typescript": "^5.0.0",
+    "typescript": "^3.2.4",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  }
+}
