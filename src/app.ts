@@ -24,6 +24,7 @@ class Swiper {
         this.createWrap()
         this.autoPlay()
 
+        this.createDots()
         this.boxOver()
     }
 
@@ -33,6 +34,7 @@ class Swiper {
         box.style.width = `${this.width}px`
         box.style.height = `${this.height}px`
         box.style.overflow = 'hidden'
+        box.style.position = 'relative'
         this.outBox = box
 
         let inner = document.createElement('div')
@@ -67,9 +69,56 @@ class Swiper {
         return item
     }
 
+    createDots() {
+        let dotFagement = document.createDocumentFragment()
+
+        let dotBox = document.createElement('div')
+        dotBox.style.position = 'absolute'
+        dotBox.style.width = '100%'
+        dotBox.style.bottom = '20px'
+
+        let div = document.createElement('div')
+        div.style.margin = 'auto'
+        div.id = 'swiper-dots'
+        div.style.textAlign = 'center'
+        for(let i = 0; i < this.length; i ++) {
+            div.appendChild(this.dotMachine(i + 1))
+        }
+
+        dotBox.appendChild(div)
+        dotFagement.appendChild(dotBox)
+        this.outBox.appendChild(dotFagement)
+    }
+
+    dotMachine(id: number) {
+        let dot = document.createElement('div')
+        dot.className = 'swiper-dot-item'
+        dot.id = `swiper-dot-item-${id}`
+        dot.style.width = '10px'
+        dot.style.height = '10px'
+        dot.style.borderRadius = '50%'
+        dot.style.display = 'inline-block'
+        dot.style.backgroundColor = '#ffffff'
+        dot.style.margin = '0 5px'
+        return dot
+    }
+
     swipe(index: number) {
         let transWidth = this.width * (index - 1)
         this.innerBox.style.transform = `translateX(-${transWidth}px)`
+        
+        this.swipeDot(index)
+    }
+
+    swipeDot(index: number) {
+        let alldots: NodeListOf<HTMLElement> = document.querySelectorAll('#swiper-dots div')
+        for (let i = 0; i < alldots.length; i ++ ) {
+            alldots[i].style.backgroundColor = '#fff'
+        }
+        let d = <HTMLElement>document.querySelector(`#swiper-dot-item-${index}`)
+        if(d !== null) {
+            d.style.backgroundColor = '#ccc'            
+        }
     }
 
     autoPlay() {
