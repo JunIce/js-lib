@@ -25,3 +25,7 @@ gulp.task('browserify', gulp.series("typescript", function () {
 gulp.task("default", function(){
     gulp.watch("src/**/*.ts", gulp.series('browserify'))
 });
+
+gulp.task("jsLib", function() {
+    gulp.watch("src/**/*.ts", gulp.series("typescript"))
+})
